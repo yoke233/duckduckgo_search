@@ -202,13 +202,18 @@ class AsyncDDGS:
 
         payload = {
             "q": keywords,
-            "kl": region,
             "l": region,
-            "p": "",
-            "s": "0",
-            "df": "",
+            "a": "h_",
+            "dl": "zh",
+            "ct": "SG",
             "vqd": vqd,
             "ex": "",
+            "sp": "1",
+            "dfrsp": "1",
+            "wrap": "1",
+            "biaexp": "b",
+            "litexp": "c",
+            "msvrtexp": "b",
         }
         safesearch = safesearch.lower()
         if safesearch == "moderate":
@@ -226,6 +231,7 @@ class AsyncDDGS:
         async def _text_api_page(s: int, page: int) -> None:
             priority = page * 100
             payload["s"] = f"{s}"
+            print(payload)
             resp_content = await self._aget_url("GET", "https://links.duckduckgo.com/d.js", params=payload)
             page_data = _text_extract_json(resp_content, keywords)
 
